@@ -107,7 +107,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="tweetTextLabel" destination="epC-Fs-Q5Z" id="ZLP-IG-Wsf"/>
+                                            <outlet property="tweet" destination="epC-Fs-Q5Z" id="M0a-Ud-BMg"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

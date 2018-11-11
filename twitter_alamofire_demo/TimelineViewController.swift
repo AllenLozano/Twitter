@@ -8,15 +8,23 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController {
-
+class TimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+   
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tweetz: UIView!
+    var tweets: [Tweet]!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.delegate  = self as UITableViewDelegate
+        tableView.dataSource = self as UITableViewDataSource
+        tableView.rowHeight = 100
+        
+        
+        fetchTweets()
         // Do any additional setup after loading the view.
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -26,14 +34,30 @@ class TimelineViewController: UIViewController {
         self.performSegue(withIdentifier: "logoutSegue", sender: nil)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
+        let tweets = self.tweets[indexPath.row]
+        cell.tweet.text = tweets as? String
+        return cell
     }
-    */
-
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let tweets = tweets {
+            return tweets.count
+        } else {
+            return 0
+        }
+    }
+    func fetchTweets() {
+        APIManager.shared.getHomeTimeLine { (tweets, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                self.tweets = tweets!
+                self.tableView.reloadData()
+            }
+        }
+    }
 }
