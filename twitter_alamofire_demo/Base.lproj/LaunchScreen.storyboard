@@ -20,12 +20,26 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="TwitterLogoBlue" translatesAutoresizingMaskIntoConstraints="NO" id="aek-Kl-Gor">
+                                <rect key="frame" x="94" y="137" width="193" height="178"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="aek-Kl-Gor" secondAttribute="bottom" constant="352" id="0GS-oF-id6"/>
+                            <constraint firstItem="aek-Kl-Gor" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="117" id="2hp-Yb-sU4"/>
+                            <constraint firstItem="aek-Kl-Gor" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="94" id="AqZ-eh-Dv2"/>
+                            <constraint firstAttribute="trailing" secondItem="aek-Kl-Gor" secondAttribute="trailing" constant="88" id="l1Z-w2-rfn"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="TwitterLogoBlue" width="200" height="200"/>
+    </resources>
 </document>
