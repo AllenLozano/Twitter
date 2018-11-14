@@ -9,7 +9,7 @@
 import UIKit
 
 class Tweet: NSObject {
-    /*var id: Int? // For favoriting, retweeting & replying
+    var id: Int? // For favoriting, retweeting & replying
     var text: String? // Text content of tweet
     var favoriteCount: Int? // Update favorite count label
     var favorited: Bool? // Configure favorite button
@@ -63,5 +63,5 @@ class Tweet: NSObject {
             tweets.append(tweet)
         }
         return tweets
-    }*/
+    }
 }

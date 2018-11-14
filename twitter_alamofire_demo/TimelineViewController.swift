@@ -36,9 +36,20 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
-        let tweets = self.tweets[indexPath.row]
-        cell.tweet.text = tweets as? String
+        let tweet = tweets[indexPath.row]
+        cell.indexPath = indexPath
+        
+        cell.tweetLabel.text = tweet.text
+        cell.timeLabel.text = tweet.createdAtString
+        cell.handleLabel.text = "@\((tweet.user?.screenName)!)"
+        cell.nameLabel.text = (tweet.user?.name)!
+        let avatarUrl = tweet.user?.profImageUrl!
+        let data = try? Data(contentsOf: avatarUrl!)
+        if let imageData = data {
+            cell.pictureImageView.image = UIImage(data: imageData)
+        }
         return cell
+        
     }
     
     
