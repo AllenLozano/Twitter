@@ -43,6 +43,9 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.timeLabel.text = tweet.createdAtString
         cell.handleLabel.text = "@\((tweet.user?.screenName)!)"
         cell.nameLabel.text = (tweet.user?.name)!
+        cell.retweetLabel.text = "\((tweet.retweetCount)!)"
+        cell.favoriteLabel.text = "\((tweet.favoriteCount)!)"
+        
         let avatarUrl = tweet.user?.profImageUrl!
         let data = try? Data(contentsOf: avatarUrl!)
         if let imageData = data {
