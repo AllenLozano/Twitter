@@ -14,11 +14,15 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
     var tweets: [Tweet]!
     var tweetz: Tweet?
     var indexPeth: IndexPath?
-    
+    var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(fetchTweets), for: UIControlEvents.valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+        
         tableView.delegate  = self as UITableViewDelegate
         tableView.dataSource = self as UITableViewDataSource
         tableView.rowHeight = 100
@@ -86,32 +90,14 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
             else {
                 self.tweets = tweets!
                 self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
             }
         }
     }
     
-    
     @IBAction func favorite(_ sender: UIButton) {
         print("clicked on retweet")
-        
-        
-        /*Tweet.retweet = !Tweet.retweeted!
-        if(Tweet.retweeted!){
-            retweetButton.setImage(UIImage(named: "retweetGreen"), for: .normal)
-        }
-        else{
-            retweetButton.setImage(UIImage(named: "retweetGray"), for: .normal)
-        }
-        
-        TwitterClient.sharedInstance?.retweet(tweetId: tweet.tweetId!, success: { () in
-            //you have already handled the image
-            
-        }, failure: { (error: Error) in
-            //if service fails, then you need to set the image back
-            print(error.localizedDescription)
-        })*/
+    
+    
     }
-    
-    
-   
 }
