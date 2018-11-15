@@ -31,14 +31,17 @@ class Tweet: NSObject {
     
     // Change tweet to original tweet
     dictionary = originalTweet
+        
+        
     }
+    
     
         id = dictionary["id"] as? Int
         text = dictionary["text"] as? String
         favoriteCount = dictionary["favorite_count"] as? Int
-        favorited = dictionary["favorited"] as? Bool
+        favorited = (dictionary["favorited"] as? Bool)!
         retweetCount = dictionary["retweet_count"] as? Int
-        retweeted = dictionary["retweeted"] as? Bool
+        retweeted = (dictionary["retweeted"] as? Bool)!
     
         let user = dictionary["user"] as! [String: Any]
         self.user = User(dictionary: user)
@@ -54,6 +57,9 @@ class Tweet: NSObject {
         formatter.timeStyle = .none
         // Convert Date to String and set the createdAtString property
         createdAtString = formatter.string(from: date)
+        
+        
+        
     }
     
     static func tweets(with array: [[String: Any]]) -> [Tweet] {
@@ -64,4 +70,5 @@ class Tweet: NSObject {
         }
         return tweets
     }
+    
 }

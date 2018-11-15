@@ -11,9 +11,11 @@ import UIKit
 class TimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
    
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tweetz: UIView!
     var tweets: [Tweet]!
-
+    var tweetz: Tweet?
+    var indexPeth: IndexPath?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,6 +39,7 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         let tweet = tweets[indexPath.row]
+        
         cell.indexPath = indexPath
         
         cell.tweetLabel.text = tweet.text
@@ -45,17 +48,29 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.nameLabel.text = (tweet.user?.name)!
         cell.retweetLabel.text = "\((tweet.retweetCount)!)"
         cell.favoriteLabel.text = "\((tweet.favoriteCount)!)"
+        if (tweet.favorited)! {
+            cell.favoriteButton.setImage(UIImage(named: "favor-icon-red"), for: .normal)
+        } else {
+            cell.favoriteButton.setImage(UIImage(named: "favor-icon"), for: .normal)
+        }
+        
+        if (tweet.retweeted)! {
+            cell.retweetButton.setImage(UIImage(named: "retweet-icon-green"), for: .normal)
+        } else {
+            cell.retweetButton.setImage(UIImage(named: "retweet-icon"), for: .normal)
+        }
         
         let avatarUrl = tweet.user?.profImageUrl!
         let data = try? Data(contentsOf: avatarUrl!)
         if let imageData = data {
             cell.pictureImageView.image = UIImage(data: imageData)
         }
+        
         return cell
         
     }
     
-    
+   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let tweets = tweets {
             return tweets.count
@@ -74,4 +89,29 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
     }
+    
+    
+    @IBAction func favorite(_ sender: UIButton) {
+        print("clicked on retweet")
+        
+        
+        /*Tweet.retweet = !Tweet.retweeted!
+        if(Tweet.retweeted!){
+            retweetButton.setImage(UIImage(named: "retweetGreen"), for: .normal)
+        }
+        else{
+            retweetButton.setImage(UIImage(named: "retweetGray"), for: .normal)
+        }
+        
+        TwitterClient.sharedInstance?.retweet(tweetId: tweet.tweetId!, success: { () in
+            //you have already handled the image
+            
+        }, failure: { (error: Error) in
+            //if service fails, then you need to set the image back
+            print(error.localizedDescription)
+        })*/
+    }
+    
+    
+   
 }
